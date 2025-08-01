@@ -12,7 +12,7 @@ from app.models.enums import EngineStatus
 router = APIRouter()
 
 @router.post("/", status_code=status.HTTP_201_CREATED, response_model=TelemetryRead)
-async def receive_telemetry(*, db: AsyncSession = Depends(deps.get_db), telemetry_in: TelemetryCreate,):
+async def receive_telemetry(*, db: AsyncSession = Depends(deps.get_db), telemetry_in: TelemetryCreate):
     """
     Receive and store a new telemetry data point.
     """
