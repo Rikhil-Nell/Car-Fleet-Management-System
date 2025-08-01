@@ -18,7 +18,7 @@ class TelemetryData(SQLModel, table=True):
     fuel_battery_level: float
     odometer_reading: float
     diagnostic_codes: Optional[str] = Field(default=None)
-    timestamp: datetime = Field(index=True)
+    timestamp: datetime = Field(sa_column=Column(TIMESTAMP(timezone=True), nullable=False, index=True))
     created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc), sa_column=Column(TIMESTAMP(timezone=True), nullable=False))
     
     # Foreign Keys
