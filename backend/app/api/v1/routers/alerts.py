@@ -2,8 +2,8 @@ import uuid
 from typing import List
 from fastapi import APIRouter, Depends
 from sqlmodel.ext.asyncio.session import AsyncSession
-from app.schemas import AlertCreate, AlertRead
-from app.crud import alert
+from app.schemas import AlertRead
+from app.crud.alert_crud import alert
 from app.api import deps
 
 router = APIRouter()
@@ -28,5 +28,5 @@ async def get_alert(
     """
     Get a specific alert by its ID.
     """
-    alert = await alert.get(db=db, id=alert_id)
-    return alert
+    alert_fetched = await alert.get(db=db, id=alert_id)
+    return alert_fetched

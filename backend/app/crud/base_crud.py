@@ -40,7 +40,7 @@ class CRUDBase(Generic[ModelType, CreateSchemaType, UpdateSchemaType]):
         """
         query = select(self.model).offset(skip).limit(limit)
         result = await db.exec(query)
-        return result.scalars().all()
+        return result.all()
 
     async def create(self, db: AsyncSession, *, obj_in: CreateSchemaType) -> ModelType:
         """

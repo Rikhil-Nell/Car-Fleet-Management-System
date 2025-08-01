@@ -27,6 +27,3 @@ class VehicleUpdate(BaseModel):
 class VehicleRead(VehicleBase):
     id: uuid.UUID
     created_at: datetime
-
-    class Config:
-        orm_mode = True

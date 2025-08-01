@@ -5,9 +5,12 @@ from sqlmodel.ext.asyncio.session import AsyncSession
 
 from app.crud.telemetry_data_crud import telemetry_data
 from app.schemas.telemetry_data import TelemetryCreate, TelemetryRead
+
 from app.api import deps
 from app.models import TelemetryData
 from app.models.enums import EngineStatus
+
+from app.utils import alert_logic
 
 router = APIRouter()
 
@@ -16,7 +19,10 @@ async def receive_telemetry(*, db: AsyncSession = Depends(deps.get_db), telemetr
     """
     Receive and store a new telemetry data point.
     """
+    
     new_telemetry = await telemetry_data.create(db=db, obj_in=telemetry_in)
+    await alert_logic.check_telemetry_for_alerts(db=db, telemetry=new_telemetry)
+
     return new_telemetry
 
 @router.get("/", response_model=List[TelemetryRead])

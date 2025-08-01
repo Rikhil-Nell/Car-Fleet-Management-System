@@ -44,6 +44,10 @@ class Settings(BaseSettings):
     
     FIRST_SUPERUSER_EMAIL: EmailStr
     FIRST_SUPERUSER_PASSWORD: str
+
+    SPEED_LIMIT_KMH: int
+    SPEEDING_STRIKE_LIMIT: int
+    LOW_FUEL_THRESHOLD_PERCENT: int
     
     model_config = SettingsConfigDict(case_sensitive=True, env_file="../.env")
 
