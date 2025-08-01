@@ -1,7 +1,7 @@
 import uuid
 from typing import TYPE_CHECKING
 from datetime import datetime, timezone
-from sqlmodel import Field, SQLModel, Relationship
+from sqlmodel import Field, SQLModel, Relationship, Column, TIMESTAMP
 from .enums import AlertType, AlertSeverity
 
 if TYPE_CHECKING:
@@ -15,7 +15,7 @@ class Alert(SQLModel, table=True):
     severity: AlertSeverity
     message: str
     resolved: bool = Field(default=False)
-    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc), index=True)
+    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc), sa_column=Column(TIMESTAMP(timezone=True), index=True, nullable=False))
     
     # Foreign Keys
     vehicle_id: uuid.UUID = Field(foreign_key="vehicles.id", index=True)

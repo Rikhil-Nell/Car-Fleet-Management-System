@@ -20,14 +20,13 @@ class Settings(BaseSettings):
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 60
     SECRET_KEY: str = secrets.token_urlsafe(32)
     
-    #* Database parts*
+    # Database parts
     DATABASE_USER: str
     DATABASE_PASSWORD: str
     DATABASE_HOST: str
     DATABASE_PORT: int
     DATABASE_NAME: str
     
-    #* Computed Database URI*
     ASYNC_DATABASE_URI: PostgresDsn | str = ""
     
     @field_validator("ASYNC_DATABASE_URI", mode="after")
@@ -40,11 +39,9 @@ class Settings(BaseSettings):
                 host=info.data.get("DATABASE_HOST"),
                 port=info.data.get("DATABASE_PORT"),
                 path=info.data.get("DATABASE_NAME"),
-                #query="sslmode=require"  # This is the key addition for NeonDB
             )
         return v
     
-    #* For initial admin user creation*
     FIRST_SUPERUSER_EMAIL: EmailStr
     FIRST_SUPERUSER_PASSWORD: str
     
