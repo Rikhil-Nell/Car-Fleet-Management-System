@@ -31,17 +31,11 @@ It is recommended to use `uv` for faster dependency management.
 **Using `uv` (Recommended):**
 
 ```bash
-# Create a virtual environment
-uv venv
-
-# Activate the environment
-# On Windows
-.venv\Scripts\activate
-# On macOS/Linux
-source .venv/bin/activate
-
 # Install dependencies
 uv sync
+
+# On Windows
+.venv\Scripts\activate
 ```
 
 **Using `pip` (Alternative):**
@@ -91,6 +85,7 @@ alembic upgrade head
 ### 6. Run the Application
 
 ```bash
+cd backend
 uvicorn app.main:app --reload
 ```
 
